@@ -8,9 +8,17 @@ jobs:
   update-version:
     runs-on: ubuntu-latest
     steps:
-      - name: update
+      - name: checkout
         uses: actions/checkout@v2
+      - name: commit
         run: |
+          git config --local user.email "${{ secrets.EMAIL }}"
+          git config --local user.name ""
           git log -n 1 $(git branch --show-current) --oneline | cut -d " " -f 1 > version.txt
           git add version.txt
           git commit -m ":memo: update API version"
+      - name: push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN}}
+          branch: master
