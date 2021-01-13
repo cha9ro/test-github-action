@@ -10,15 +10,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: commit
+      - name: commit and push
         run: |
           git config --local user.email "dummy@dummy.com"
           git config --local user.name "dummy"
           git log -n 1 $(git branch --show-current) --oneline | cut -d " " -f 1 > version.txt
           git add version.txt
           git commit -m ":memo: update API version"
-      - name: push
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN}}
-          branch: master
+          git push origin master
