@@ -12,8 +12,8 @@ jobs:
         uses: actions/checkout@v2
       - name: commit and push
         run: |
-          git config --local user.email " "
-          git config --local user.name " "
+          git config --local user.email "test@test"
+          git config --local user.name "test"
           git log -n 1 $(git branch --show-current) --oneline | cut -d " " -f 1 > version.txt
           git add version.txt
           git commit -m ":memo: update API version"
