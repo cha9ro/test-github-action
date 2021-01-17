@@ -14,7 +14,7 @@ jobs:
         run: |
           git config --local user.email "test@test"
           git config --local user.name "Github-action [bot]"
-          git log -n 1 $(git branch --show-current) --oneline | cut -d " " -f 1 > version.txt
+          git log -n 1 master --oneline | cut -d " " -f 1 > version.txt
           git add version.txt
           git commit -m ":memo: update API version"
       - name: push
