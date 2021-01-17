@@ -10,12 +10,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: change and commit
         run: |
           git config --local user.email "test@test"
-          git config --local user.name "test"
+          git config --local user.name "Github-action [bot]"
           git log -n 1 $(git branch --show-current) --oneline | cut -d " " -f 1 > version.txt
           git add version.txt
           git commit -m ":memo: update API version"
